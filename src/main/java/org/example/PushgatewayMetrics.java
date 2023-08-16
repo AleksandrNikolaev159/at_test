@@ -31,7 +31,7 @@ public class PushgatewayMetrics {
             testDuration.set(testMetrics.getTestDuration());
 
 
-            PushGateway pg = new PushGateway("127.0.0.1:9191");
+            PushGateway pg = new PushGateway("127.0.0.1:9091");
             pg.push(registry, "ui_test",labelsMap);
 
 
