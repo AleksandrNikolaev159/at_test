@@ -16,38 +16,27 @@ public class TestListener implements ITestListener {
         }
     }
 
+
+    public void onTestFailure(ITestResult iTestResult) {
+        try {
+            this.sendTestMethodStatus(iTestResult, "FAIL");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }    }
+
+
     private void sendTestMethodStatus(ITestResult iTestResult, String status) throws IOException {
 
         String testResult = status;
 
-        long duration = iTestResult.getEndMillis() - - iTestResult.getStartMillis();
-
-        double testDuration = (double) duration;
+        long testDuration = iTestResult.getEndMillis() - iTestResult.getStartMillis();
 
         String testException = String.valueOf(iTestResult.getThrowable());
 
-        TestMetrics testMetrics = new TestMetrics(testResult,testDuration,testException);
+        TestMetrics testMetrics = new TestMetrics(testResult,testDuration);
 
         PushgatewayMetrics.pushTestResultMetric(iTestResult, testMetrics);
 
-        System.out.println(testDuration);
-
     }
-
-
-
-//    public void onTestSuccess(ITestResult tr) {
-//        try {
-//
-//            PushgatewayMetrics.pushTestResultMetric(tr);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-
-
-
-
-
 
 }

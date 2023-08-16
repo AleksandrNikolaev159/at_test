@@ -4,9 +4,7 @@ public class TestMetrics {
 
     private String testResult;
 
-    private double testDuration;
-
-    private String testException;
+    private long testDuration;
 
     public String getTestResult() {
         return testResult;
@@ -16,25 +14,16 @@ public class TestMetrics {
         this.testResult = testResult;
     }
 
-    public double getTestDuration() {
+    public long getTestDuration() {
         return testDuration;
     }
 
-    public void setTestDuration(double testDuration) {
+    public void setTestDuration(long testDuration) {
         this.testDuration = testDuration;
     }
 
-    public String getTestException() {
-        return testException;
-    }
-
-    public void setTestException(String testException) {
-        this.testException = testException;
-    }
-
-    public TestMetrics(String testResult, double testDuration, String testException) {
+    public TestMetrics(String testResult, long testDuration) {
         this.testResult = testResult;
         this.testDuration = testDuration;
-        this.testException = testException;
     }
 }

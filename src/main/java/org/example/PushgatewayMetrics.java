@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 
 public class PushgatewayMetrics {
@@ -22,26 +23,19 @@ public class PushgatewayMetrics {
             CollectorRegistry registry = new CollectorRegistry();
 
             Gauge testResult = Gauge.build("ui_test_result","Result of the test")
-                            .labelNames("result")
                             .register(registry);
-            testResult.labels(testMetrics.getTestResult());
+            testResult.set(iTestResult.getStatus());
 
-            Gauge testDuration = Gauge.build("ui_test_duration","Duration of the test")
-                    .labelNames("duration")
+            Gauge testDuration = Gauge.build("test_duration_millis","Duration of the test")
                     .register(registry);
             testDuration.set(testMetrics.getTestDuration());
 
-            PushGateway pg = new PushGateway("127.0.0.1:9090");
+
+            PushGateway pg = new PushGateway("127.0.0.1:9191");
             pg.push(registry, "ui_test",labelsMap);
 
-            //pg.pushAdd(CollectorRegistry.defaultRegistry, "ui_test");
 
-//            Gauge testDuration = Gauge.build()
-//                    .name("test_duration")
-//                    .help("Duration of the test")
-//                    .labelNames(iTestResult.getName(),"test_system")
-//                    .register(CollectorRegistry.defaultRegistry);
-//            testDuration.set(testMetrics.getTestDuration());
+
 
 //            Gauge testException = Gauge.build()
 //                    .name("test_exception")

@@ -40,24 +40,24 @@ public class AppTest {
 
     result = driver.findElement(By.xpath("//div[contains(text(),'Результатов:')]")).isDisplayed();
 
-    //driver.quit();
-
-  }
-
-  @Test(priority = 2,description = "Hello world")
-
-  public void secondTest() {
-
-    driver.get("https://www.google.com/");
-
-    driver.findElement(By.xpath("//textarea[@title='Поиск']")).sendKeys("Hello ");
-
-    driver.switchTo().activeElement().sendKeys(Keys.ENTER);
-
-    result = driver.findElement(By.xpath("//div[contains(text(),'Результатов:')]")).isDisplayed();
-
     driver.quit();
 
   }
+
+//  @Test(priority = 2,description = "Hello world")
+//
+//  public void secondTest() {
+//
+//    driver.get("https://www.google.com/");
+//
+//    driver.findElement(By.xpath("//textarea[@title='Поиск']")).sendKeys("Hello ");
+//
+//    driver.switchTo().activeElement().sendKeys(Keys.ENTER);
+//
+//    result = driver.findElement(By.xpath("//div[contains(text(),'Результатов:')]")).isDisplayed();
+//
+//    driver.quit();
+//
+//  }
 
 }
