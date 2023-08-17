@@ -22,7 +22,16 @@ public class TestListener implements ITestListener {
             this.sendTestMethodStatus(iTestResult, "FAIL");
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }    }
+        }
+    }
+
+    public void onTestSkipped(ITestResult iTestResult) {
+        try {
+            this.sendTestMethodStatus(iTestResult, "SKIPPED");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
     private void sendTestMethodStatus(ITestResult iTestResult, String status) throws IOException {
