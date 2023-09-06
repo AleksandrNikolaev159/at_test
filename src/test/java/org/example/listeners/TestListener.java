@@ -1,4 +1,4 @@
-package org.example.metrics;
+package org.example.listeners;
 
 import org.testng.ITestListener;
 import org.testng.ITestResult;

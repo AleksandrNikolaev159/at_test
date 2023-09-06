@@ -1,4 +1,4 @@
-package org.example;
+package org.example.ui.dataProviders;
 
 import org.testng.annotations.DataProvider;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class GoogleTestData {
+public class GoogleProvider {
 
     @DataProvider(name = "googleSearch")
     public Iterator<Object[]> stringProvider() {
