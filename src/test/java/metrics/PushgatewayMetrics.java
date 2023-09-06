@@ -1,4 +1,4 @@
-package org.example.metrics;
+package metrics;
 
 import io.prometheus.client.CollectorRegistry;
 import io.prometheus.client.Gauge;

@@ -1,4 +1,4 @@
-package org.example.api.tests;
+package api.tests;
 
 public class SpringRestAPITests {
 
