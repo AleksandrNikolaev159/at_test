@@ -28,6 +28,6 @@ uploads
 ### Other ###
 .mvn/
 *.log
-*.md
+#*.md
 *.cmd
 *.imi
