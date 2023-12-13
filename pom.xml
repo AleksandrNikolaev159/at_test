@@ -34,36 +34,6 @@
       <scope>compile</scope>
     </dependency>
 
-    <dependency>
-      <groupId>io.prometheus</groupId>
-      <artifactId>simpleclient</artifactId>
-      <version>0.16.0</version>
-    </dependency>
-    <!-- Hotspot JVM metrics-->
-    <dependency>
-      <groupId>io.prometheus</groupId>
-      <artifactId>simpleclient_hotspot</artifactId>
-      <version>0.16.0</version>
-    </dependency>
-    <!-- Exposition HTTPServer-->
-    <dependency>
-      <groupId>io.prometheus</groupId>
-      <artifactId>simpleclient_httpserver</artifactId>
-      <version>0.16.0</version>
-    </dependency>
-    <!-- Pushgateway exposition-->
-    <dependency>
-      <groupId>io.prometheus</groupId>
-      <artifactId>simpleclient_pushgateway</artifactId>
-      <version>0.16.0</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
-    <dependency>
-      <groupId>com.squareup.okhttp3</groupId>
-      <artifactId>okhttp</artifactId>
-      <version>4.11.0</version>
-    </dependency>
 
     <!-- https://mvnrepository.com/artifact/com.codeborne/selenide -->
     <dependency>
@@ -72,7 +42,19 @@
       <version>6.17.2</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>5.3.2</version>
+      <scope>test</scope>
+    </dependency>
 
+    <dependency>
+      <groupId>com.influxdb</groupId>
+      <artifactId>influxdb-client-java</artifactId>
+      <version>6.6.0</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -82,6 +64,29 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.0.0-M5</version>
       </plugin>
+
+      <plugin>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
+        <!-- RELEASE_VERSION -->
+        <version>6.6.0</version>
+        <!-- /RELEASE_VERSION -->
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <inputSpec>${project.basedir}/src/main/resources/api.yaml</inputSpec>
+              <generatorName>java</generatorName>
+              <configOptions>
+                <sourceFolder>src/gen/java/main</sourceFolder>
+              </configOptions>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
 </project>
