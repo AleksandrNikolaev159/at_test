@@ -15,7 +15,16 @@ import static com.codeborne.selenide.Selenide.open;
 public class GoogleUiTests {
 
   @Test(priority = 1,description = "Google test",dataProviderClass = GoogleProvider.class, dataProvider = "googleSearch")
-  public void selenideTest(String dataString){
+  public void helloTest (String dataString){
+    GooglePage page = open("https://www.google.com/", GooglePage.class);
+    GooglePage.search.setValue(dataString)
+            .pressEnter();
+    GooglePage.resultSearch.shouldBe(Condition.visible);
+
+  }
+
+  @Test(priority = 2,description = "Google test",dataProviderClass = GoogleProvider.class, dataProvider = "googleSearch")
+  public void test (String dataString){
     GooglePage page = open("https://www.google.com/", GooglePage.class);
     GooglePage.search.setValue(dataString)
             .pressEnter();
