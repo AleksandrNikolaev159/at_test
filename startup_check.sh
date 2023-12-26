@@ -1,33 +1,17 @@
 #!/bin/bash
 
-# Переход в каталог /root/metrics
-cd /home/aleksandr/IdeaProjects/at_tests;
-
 echo "$(date +'%Y-%m-%d %H:%M:%S') Выполняется startup_check.sh"
 
-# Ожидание, пока контейнеры поднимутся (максимум 60 секунд)
-for i in {1..60}; do
-    if docker-compose ps --services --filter "status=running" | grep -q "influxdb" && \
-       docker-compose ps --services --filter "status=running" | grep -q "grafana"; then
-        break
-    fi
-    sleep 1
-done
+# Переход в каталог /root/metrics
+cd /root/metrics;
 
-# Вывод информации о контейнерах для отладки
-docker-compose ps
-
-# Проверка статуса контейнера grafana
-if docker-compose ps --services --filter "status=running" | grep -q "grafana"; then
-    # Проверка статуса контейнера influxdb
-    if docker-compose ps --services --filter "status=running" | grep -q "influxdb"; then
-        echo "Контейнеры grafana и influxdb запущены."
-        docker exec influxdb sh /var/lib/influxdb_data/user_active.sh
-    else
-        echo "Контейнер influxdb не найден или не запущен. Запуск start.sh..."
-        sh /home/aleksandr/IdeaProjects/at_tests/start.sh
-    fi
+sleep 5;
+# Проверка, запущен ли контейнер Grafana
+if [ -z "$(docker-compose ps -q grafana)" ] || [ -z "$(docker ps -q --no-trunc | grep $(docker-compose ps -q grafana))" ] || \
+   [ -z "$(docker-compose ps -q influxdb)" ] || [ -z "$(docker ps -q --no-trunc | grep $(docker-compose ps -q influxdb))" ]; then
+  echo "Один из контейнеров (Grafana или InfluxDB) не запущен. Перезапуск...";
+  sh /root/metrics/start.sh;
 else
-    echo "Контейнер grafana не найден или не запущен. Запуск start.sh..."
-    sh /home/aleksandr/IdeaProjects/at_tests/start.sh
+  echo "Оба контейнера (Grafana и InfluxDB) уже запущены"
+  docker exec influxdb sh /var/lib/influxdb_data/user_active.sh;
 fi

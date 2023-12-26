@@ -8,8 +8,8 @@ import com.influxdb.client.write.Point;
 public class InfluxDbSender {
     static final char []  newToken = "".toCharArray();
     static final char [] influxDbToken  = "CbnzBUNDSmaBdNuIpEKUXiSnLUACnRP0lV7zM8CVhBDgp4zLApJnpFEbSmqXtUruj22mcmUUe_1MkW6gwqcFqA==".toCharArray();
-    static final String influxDbUrl = "http://192.168.0.5:8086/";
-    static final String bucket = "test1_metrics";
+    static final String influxDbUrl = "https://192.168.0.11:8086/";
+    static final String bucket = "test_metrics";
     static final String org = "home";
 
     public static void send(Point point){
